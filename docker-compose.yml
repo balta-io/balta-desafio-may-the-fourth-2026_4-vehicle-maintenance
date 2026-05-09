@@ -1,0 +1,6 @@
+services:
+  vehiclemaintenance:
+    image: ${DOCKER_REGISTRY-}vehiclemaintenance
+    build:
+      context: .
+      dockerfile: VehicleMaintenance/Dockerfile
