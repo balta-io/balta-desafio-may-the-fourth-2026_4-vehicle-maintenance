@@ -53,13 +53,16 @@ if (vehicle is null)
 string context = string.Empty;
 
 if (vehicle.CurrentMileage - vehicle.LastOilChangeMileage >= 10000)
-    context += "precisa trocar o óleo, pois já tem mais de 10.000km deis de a ultima troca;";
+    context += "precisa trocar o óleo, pois já tem mais de 10.000km desde a ultima troca;";
 
 if (vehicle.CurrentMileage - vehicle.LastTireChangeMileage >= 20000)
-    context += "precisa revisar o pneu, pois já tem mais de 20.000km deis de a ultima revisão;";
+    context += "precisa revisar o pneu, pois já tem mais de 20.000km desde a ultima revisão;";
 
 if (vehicle.CurrentMileage - vehicle.LastRevisionMileage >= 30000)
-    context += "precisa fazer revisão geral, pois já tem mais de 30.000km deis de a ultima revisão;";
+    context += "precisa fazer revisão geral, pois já tem mais de 30.000km desde a ultima revisão;";
+
+if (string.IsNullOrWhiteSpace(context))
+    context = "Nenhuma manutenção preventiva necessária no momento.";
 
 var agent = app.Services.GetRequiredKeyedService<AIAgent>("mechanic");
 
@@ -73,7 +76,7 @@ Modelo: {vehicle.Model}
 Ano: {vehicle.Year}
 Quilometragem Atual: {vehicle.CurrentMileage}
 
-Revisões ncessárias:
+Revisões necessárias:
 {context}
 
 Sugira:
